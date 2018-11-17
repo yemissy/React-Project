@@ -100,6 +100,7 @@
 }
 #formbody{
   display: flex;
+  margin-top: 40px;
 }
 #lists{
   width: 300px;
@@ -203,6 +204,6 @@
   border-radius: 40px;
   font-size: 25px;
   position: absolute;
-  top:84%;
+  top:57%;
   left:68%;
 }
