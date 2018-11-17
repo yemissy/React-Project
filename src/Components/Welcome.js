@@ -12,6 +12,7 @@ class Welcome extends Component{
   render(){
     return (
       <div>
+        <button id ="formLoad" onClick ={ () => this.props.renderThis('request')}>Book Services</button>
         <div id="headContainer"><h1 id="mainHead">Sam's Photography</h1></div>
         <img src={this.state.photographersPic} className="ProfileImg"></img>
         <button onClick={ () => this.props.renderThis('mainScreen')} className="enter">

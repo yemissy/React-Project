@@ -4,6 +4,11 @@ import Welcome from './Components/Welcome.js';
 import Categories from './Components/Categories.js';
 import axios from 'axios';
 import './App.css';
+import TheForm from './Components/Form.js';
+import ServiceForm from './Components/ServiceForm.js';
+import Data from './Components/Data.js';
+console.log (Data);
+
 
 
 // https://api.unsplash.com/photos/?client_id=YOUR_ACCESS_KEY
@@ -23,15 +28,33 @@ class App extends Component {
     this.state={
       currentPage:'welcome',
       categoryCover: [],
-      titles:['The Light Series', 'Engagements Shoots', 'Baby Shower', 'Weddings', 'Birthdays', 'Potraits'],
+      titles:[
+        {name: 'The Light Series'},
+        {name: 'Engagements Shoots'},
+        {name: 'Baby Shower'},
+        {name: 'Weddings'},
+        {name: 'Birthdays'},
+        {name: 'Potraits'}
+       ]
     }
     this.updatePage=this.updatePage.bind(this);
   }
+
+  //HandleClick function for BOOk me button
+
+  // HandleClick(e){
+  //   const theButton =e.target.name,
+  // }
+
   switcPages(){
     const page =this.state.currentPage;
+    
     switch(page){
       case 'mainScreen' :
         return <div className="container"><Categories coverPics={this.state.categoryCover} titles={this.state.titles} /></div>
+      case 'request' :
+
+      return <div className="container1"><ServiceForm titles={this.state.titles} renderThis ={this.updatePage}/></div>
         default :
           return <Welcome renderThis ={this.updatePage}/>
 
@@ -45,6 +68,7 @@ class App extends Component {
 
   async componentDidMount(){
     const covers = await axios.get(COVER_URL);
+
     this.setState({
       categoryCover: covers.data,
     })
@@ -55,6 +79,7 @@ class App extends Component {
     return (
       <div className="App">
         {this.switcPages()}
+
       </div>
     );
   }

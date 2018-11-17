@@ -9,12 +9,18 @@ export default function Categories(props){
   <div className="parent">
     {/* <button>Book My Services</button> */}
     {props.coverPics.map(cover => (
-        <div className ="categories">
-          <img className="coverImgs" src={cover.urls.full}></img>
-          <h3 className="titleHead">{props.titles[i]}</h3>
-          {i+=1}
-        </div>
+      <div className ="categories">
+        <img className="coverImgs" src={cover.urls.full}></img>
+          {/* {i+=1} */}
+      </div>
     ))}
+    <div className="titleHead">
+        {props.titles.map((title) => (
+            <div className="titles">
+              <h3>{title.name}</h3>
+            </div>
+        ))}
+    </div>
   </div>
   )
 }
