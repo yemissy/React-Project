@@ -4,7 +4,7 @@ import Welcome from './Components/Welcome.js';
 import Categories from './Components/Categories.js';
 import axios from 'axios';
 import './App.css';
-import TheForm from './Components/Form.js';
+import Collections from './Components/Collections.js';
 import ServiceForm from './Components/ServiceForm.js';
 import Data from './Components/Data.js';
 console.log (Data);
@@ -21,6 +21,9 @@ console.log (Data);
 
 //URL for the array my collections photos
 const COVER_URL= 'https://api.unsplash.com/collections/3520078/photos?client_id=c80e91a61ca21927bb319d90e5e6c422641af5bd4a6f3fa66a17efacad6e0684';
+const API_KEY=process.env.REACT_APP_API_KEY;
+const WEDDING_URL ='https://api.unsplash.com/search/photos?page=1&query=wedding&client_id=c80e91a61ca21927bb319d90e5e6c422641af5bd4a6f3fa66a17efacad6e0684';
+
 
 class App extends Component {
   constructor(props){
@@ -35,9 +38,13 @@ class App extends Component {
         {name: 'Weddings'},
         {name: 'Birthdays'},
         {name: 'Potraits'}
-       ]
+      ],
+      query:'wedding',
+      collections:[]
     }
     this.updatePage=this.updatePage.bind(this);
+    this.updateCollection=this.updatePage.bind(this);
+    this.getCollection=this.getCollection.bind(this);
   }
 
   //HandleClick function for BOOk me button
@@ -48,27 +55,46 @@ class App extends Component {
 
   switcPages(){
     const page =this.state.currentPage;
-    
+
     switch(page){
       case 'mainScreen' :
-        return <div className="container"><Categories coverPics={this.state.categoryCover} titles={this.state.titles} /></div>
+        return <div className="container"><Categories coverPics={this.state.categoryCover} titles={this.state.titles}
+        updateCollection={this.updateCollection} renderThis ={this.updatePage}/></div>
       case 'request' :
-
-      return <div className="container1"><ServiceForm titles={this.state.titles} renderThis ={this.updatePage}/></div>
+        return <div className="container1"><ServiceForm titles={this.state.titles} renderThis ={this.updatePage}/></div>
+        case 'weddings' :
+        return <Collections className="collect" getCol={this.getCollection()} col={this.state.collections} renderThis ={this.updatePage}/>
         default :
           return <Welcome renderThis ={this.updatePage}/>
-
     }
   }
+
   updatePage(page){
     this.setState({
       currentPage: page,
     });
   }
 
+
+  async getCollection(){
+    const collection= this.state.query;
+    const weddings= await axios.get(WEDDING_URL);
+    const results =weddings.data;
+    this.setState({
+      collections:results.results[0].urls,
+    })
+    console.log(results[0].urls);
+}
+
+  updateCollection(collection){
+    this.setState({
+      query:collection,
+    });
+  }
+
+
   async componentDidMount(){
     const covers = await axios.get(COVER_URL);
-
     this.setState({
       categoryCover: covers.data,
     })
@@ -79,7 +105,6 @@ class App extends Component {
     return (
       <div className="App">
         {this.switcPages()}
-
       </div>
     );
   }

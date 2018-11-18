@@ -1,10 +1,6 @@
 import React, {Component} from 'react';
 import { Form, Input, Icon, Select, Row, Col, Checkbox, Button, AutoComplete, DatePicker} from 'antd';
 
-
-// const FormItem = Form.Item;
-// const Option = Select.Option;
-// const AutoCompleteOption = AutoComplete.Option;
 const { MonthPicker,RangePicker, WeekPicker} = DatePicker;
 
 class ServiceForm extends Component {
@@ -50,7 +46,7 @@ class ServiceForm extends Component {
             </div>
           </Form.Item></div>
           <div className="myformcontainer" id="date"><Form.Item label ="Date" ><RangePicker /></Form.Item></div>
-            <Button type= "primary">Submit</Button>
+            <Button type= "primary" id="ant-btn-primary">Submit</Button>
           </Form>
       </div>
     )
