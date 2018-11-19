@@ -40,18 +40,14 @@ class App extends Component {
         {name: 'Potraits'}
       ],
       query:'wedding',
-      collections:[]
+      collections:[],
     }
     this.updatePage=this.updatePage.bind(this);
     this.updateCollection=this.updatePage.bind(this);
-    this.getCollection=this.getCollection.bind(this);
+    // this.getCollection=this.getCollection.bind(this);
   }
 
-  //HandleClick function for BOOk me button
 
-  // HandleClick(e){
-  //   const theButton =e.target.name,
-  // }
 
   switcPages(){
     const page =this.state.currentPage;
@@ -63,7 +59,7 @@ class App extends Component {
       case 'request' :
         return <div className="container1"><ServiceForm titles={this.state.titles} renderThis ={this.updatePage}/></div>
         case 'weddings' :
-        return <Collections className="collect" getCol={this.getCollection()} col={this.state.collections} renderThis ={this.updatePage}/>
+        return <div className="collect"><Collections  getCol={this.getCollection()} collect={this.state.collections} renderThis ={this.updatePage}/></div>
         default :
           return <Welcome renderThis ={this.updatePage}/>
     }
@@ -77,13 +73,15 @@ class App extends Component {
 
 
   async getCollection(){
+    i+=1;
+    let i =0;
     const collection= this.state.query;
     const weddings= await axios.get(WEDDING_URL);
-    const results =weddings.data;
+    const response=weddings.data;
     this.setState({
-      collections:results.results[0].urls,
+      collections:response.results,
     })
-    console.log(results[0].urls);
+    console.log(response.results)
 }
 
   updateCollection(collection){

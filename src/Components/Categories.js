@@ -14,10 +14,9 @@ export default function Categories(props){
           {/* {i+=1} */}
       </div>
     ))}
-    <button id="collectionsLoad" >Click me</button>
     <div className="titleHead">
         {props.titles.map((title) => (
-              <h3 className="titles" id={title.name} onClick= {()=> props.renderThis('weddings')}>{title.name}</h3>
+              <h2 className="titles" id={title.name} onClick= {()=> props.renderThis('weddings')}>{title.name}</h2>
         ))}
     </div>
   </div>
