@@ -44,7 +44,7 @@ class App extends Component {
     }
     this.updatePage=this.updatePage.bind(this);
     this.updateCollection=this.updatePage.bind(this);
-    // this.getCollection=this.getCollection.bind(this);
+    this.handleSubmit=this.handleSubmit.bind(this);
   }
 
 
@@ -56,12 +56,28 @@ class App extends Component {
       case 'mainScreen' :
         return <div className="container"><Categories coverPics={this.state.categoryCover} titles={this.state.titles}
         updateCollection={this.updateCollection} renderThis ={this.updatePage}/></div>
+      case 'mainScreen1' :
+        return <div className="container"><Categories coverPics={this.state.categoryCover} titles={this.state.titles}
+        updateCollection={this.updateCollection} renderThis ={this.updatePage}/></div>
       case 'request' :
-        return <div className="container1"><ServiceForm titles={this.state.titles} renderThis ={this.updatePage}/></div>
+        return <div className="container1"><ServiceForm titles={this.state.titles} renderThis ={this.updatePage}
+        handleSubmit={this.handleSubmit}/></div>
         case 'weddings' :
         return <div className="collect"><Collections  getCol={this.getCollection()} collect={this.state.collections} renderThis ={this.updatePage}/></div>
+        case 'book me':
+        return <div className="container1"><ServiceForm titles={this.state.titles} renderThis ={this.updatePage}
+        handleSubmit={this.handleSubmit}/></div>
         default :
           return <Welcome renderThis ={this.updatePage}/>
+    }
+  }
+
+  handleSubmit(e){
+    e.preventDefault();
+    const page =this.state.currentPage;
+    switch(page){
+      case 'Submit' :
+      return <div className="collect"><Collections  getCol={this.getCollection()} collect={this.state.collections} renderThis ={this.updatePage}/></div>
     }
   }
 

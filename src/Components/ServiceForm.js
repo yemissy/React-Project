@@ -29,13 +29,13 @@ class ServiceForm extends Component {
           ))}
         </div>
         <hr></hr>
-          <Form onSubmit className="FormRequest" >
-            <div className="myformcontainer"><Form.Item label="Name"><Input /></Form.Item></div>
-            <div className="myformcontainer"><Form.Item label="Email"><Input /></Form.Item></div>
-            <div className="myformcontainer"><Form.Item label="Phone"><Input /></Form.Item></div>
-            <div className="myformcontainer" id="service"><Form.Item label="Service :">
+          <Form action="https://formspree.io/yonayemi@yahoo.com" method="POST" className="FormRequest" >
+            <div className="myformcontainer"><Form.Item label="Name" name="Full Name"><Input /></Form.Item></div>
+            <div className="myformcontainer"><Form.Item label="Email" name="Email"><Input /></Form.Item></div>
+            <div className="myformcontainer"><Form.Item label="Phone" name="Phone"><Input /></Form.Item></div>
+            <div className="myformcontainer" id="service"><Form.Item label="Service :" name="service">
               <div id='select'>
-                <Select defaultvalue ="Weddings">
+                <Select defaultvalue ="Weddings" >
                     <Select.Option value ="Weddings">Weddings</Select.Option>
                     <Select.Option value ="BabyShower">BabyShower</Select.Option>
                     <Select.Option value ="Engagements">Engagements</Select.Option>
@@ -46,7 +46,7 @@ class ServiceForm extends Component {
             </div>
           </Form.Item></div>
           <div className="myformcontainer" id="date"><Form.Item label ="Date" ><RangePicker /></Form.Item></div>
-            <Button type= "primary" id="ant-btn-primary">Submit</Button>
+            <Button type= "primary" id="ant-btn-primary" onClick ={ () => this.props.renderThis('mainScreen1')}>Submit</Button>
           </Form>
       </div>
     )
